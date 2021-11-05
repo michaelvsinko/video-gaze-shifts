@@ -1,0 +1,36 @@
+commit-msg:
+  parallel: true
+  commands:
+    lint-commit-msg:
+      run: yarn commitlint --color --edit
+    spell-check:
+      run: yarn cspell --no-summary {1}
+
+pre-commit:
+  parallel: true
+  commands:
+    flake8:
+      glob: '*.py'
+      run: poetry run python -m flake8 {staged_files}
+    black:
+      glob: '*.py'
+      run: poetry run python -m black {staged_files} --check
+    isort:
+      glob: '*.py'
+      run: poetry run python -m isort {staged_files} --check --color
+
+pre-push:
+  parallel: true
+  commands:
+    flake8:
+      files: git diff --name-only --diff-filter=d $(git merge-base origin/$(git branch --show-current) HEAD)..HEAD
+      glob: '*.py'
+      run: poetry run python -m flake8 {files}
+    black:
+      files: git diff --name-only --diff-filter=d $(git merge-base origin/$(git branch --show-current) HEAD)..HEAD
+      glob: '*.py'
+      run: poetry run python -m black {files} --check
+    isort:
+      files: git diff --name-only --diff-filter=d $(git merge-base origin/$(git branch --show-current) HEAD)..HEAD
+      glob: '*.py'
+      run: poetry run python -m isort {files} --check --color

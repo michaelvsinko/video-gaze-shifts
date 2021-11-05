@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "python-project-template"
+version = "0.0.1"
+description = ""
+authors = ["Michael Sinko <michael.v.sinko@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+
+[tool.poetry.group.dev.dependencies]
+wemake-python-styleguide = "^0.15.3"
+black = "^21.9-beta.0"
+isort = "^5.9.3"
+mypy = "^0.910"
+flake8-black = "^0.2.3"
+
+[tool.black]
+line-length = 120
+include = "packages/"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
