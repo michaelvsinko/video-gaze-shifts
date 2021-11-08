@@ -194,14 +194,14 @@ if __name__ == "__main__":
 
     tags = []
     for _pitch, _yaw, tag in runner.forward(
-        path="./examples/input_1.mp4",
+        path="./examples/input_2.mp4",
         mode="video",
-        output_path="./examples/output_1.mp4",
+        output_path="./examples/output_2.mp4",
         visualize=True,
     ):
         tags.append(tag)
 
     stats = tags_to_stats(tags=tags)
 
-    with open("./examples/output_1.json", "w") as f:
+    with open("./examples/output_2.json", "w") as f:
         json.dump(stats, f, indent=4)
