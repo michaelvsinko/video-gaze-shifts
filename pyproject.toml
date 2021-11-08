@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "python-project-template"
+name = "video_gaze_shifts"
 version = "0.0.1"
 description = ""
 authors = ["Michael Sinko <michael.v.sinko@gmail.com>"]
@@ -7,15 +7,20 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.9,<3.10"
+torch = "^1.10.0"
+requests = "^2.26.0"
+ptgaze = "^0.2.4"
+timm = "^0.4.12"
 
-
-[tool.poetry.group.dev.dependencies]
+[tool.poetry.dev-dependencies]
 wemake-python-styleguide = "^0.15.3"
 black = "^21.9-beta.0"
 isort = "^5.9.3"
 mypy = "^0.910"
 flake8-black = "^0.2.3"
+jupyter = "^1.0.0"
+colorama = "^0.4.4"
 
 [tool.black]
 line-length = 120

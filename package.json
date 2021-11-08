@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "postinstall": "poetry install"
+    "postinstall": "poetry shell && git poetry install"
   },
   "packageManager": "yarn@3.0.2",
   "devDependencies": {

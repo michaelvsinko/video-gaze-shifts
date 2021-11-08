@@ -6,7 +6,10 @@ max-complexity = 6
 docstring-style = numpy
 strictness = long
 
-ignore = E501,E203,W503
+inline-quotes = "
+
+ignore = E501,E203,W503,N812,C910
+extend-ignore = D,WPS,C910
 per-file-ignores =
     __init__.py:F401
 exclude =
