@@ -55,8 +55,8 @@ with open("./examples/output_1.json", "w") as f:
 
 ## Results
 
-![video1 result](https://drive.google.com/uc?export=view&id=1qq75LeWmIhuKyHM_v1qK8zIiweDMuM7D)
-![video1 result](https://drive.google.com/uc?export=view&id=12K6v8DOgg75Kee449jmmyeHWqh-_wkR5)
+![video1 result](assets/output_1.gif)
+![video1 result](assets/output_2.gif)
 
 [Пример выходного json](examples/output_1.json) | [Пример выходного json](examples/output_2.json)
 
