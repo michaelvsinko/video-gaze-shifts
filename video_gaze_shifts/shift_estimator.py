@@ -27,8 +27,10 @@ def estimate_shift(pitch: float, yaw: float, mode: str = "circle", **kwargs) -> 
     raise NotImplementedError
 
 
-def tags_to_stats(tags: list[AREA_TAGS], n_digits: int = 4, fps: int = 30) -> dict:
-    per_tag_frames, per_tag_norm_frames, per_tag_time_sec, per_tag_mean_time_sec, smoothed_tags = tags_to_per_tag_times(tags=tags, fps=fps)
+def tags_to_stats(tags: list, n_digits: int = 4, fps: int = 30) -> dict:
+    tags_wo_blinks = tags_to_tags_wo_blinks(tags=tags)
+
+    per_tag_frames, per_tag_norm_frames, per_tag_time_sec, per_tag_mean_time_sec, smoothed_tags = tags_to_per_tag_times(tags=tags_wo_blinks, fps=fps)
     _, per_shift_times, per_shift_norm_times, mean_frames_wo_shift_per_tag, mean_secs_wo_shift_per_tag = tags_to_shifts(tags=smoothed_tags)
     num_shifts = sum(per_shift_times.values())
     unused_tags = [tag for tag in per_tag_frames if per_tag_frames[tag] == 0.0]
@@ -49,7 +51,7 @@ def tags_to_stats(tags: list[AREA_TAGS], n_digits: int = 4, fps: int = 30) -> di
     }
 
 
-def tags_to_per_tag_times(tags: list[AREA_TAG], fps: int = 30, smooth_window: float = 10):
+def tags_to_per_tag_times(tags: list[AREA_TAG], fps: int = 30, smooth_window: float = 15):
     per_tag_frames = {tag: 0.0 for tag in AREA_TAGS}
     for tag in tags:
         per_tag_frames[tag] += 1.0
@@ -116,6 +118,24 @@ def tags_to_shifts(tags: list[AREA_TAG], fps: int = 30, smooth_window: float = 1
         per_shift_norm_times = per_shift_times
 
     return shifts, per_shift_times, per_shift_norm_times, mean_frames_wo_shift_per_tag, mean_secs_wo_shift_per_tag
+
+
+def tags_to_tags_wo_blinks(tags: list) -> list[AREA_TAGS]:
+    tags_wo_blinks = []
+    prev_tag = None
+    for tag in tags:
+        if tag != "blink":
+            prev_tag = tag
+            break
+
+    for tag in tags:
+        if tag != "blink":
+            prev_tag = tag
+            tags_wo_blinks.append(tag)
+        else:
+            tags_wo_blinks.append(prev_tag)
+
+    return tags_wo_blinks
 
 
 def estimate_circle_shift(pitch: float, yaw: float, r: float, **kwargs) -> AREA_TAG:

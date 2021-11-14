@@ -1,5 +1,7 @@
 examples/*.mp4
 
+*.h5
+
 .yarn/*
 !.yarn/patches
 !.yarn/releases

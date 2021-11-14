@@ -12,6 +12,8 @@ torch = "^1.10.0"
 requests = "^2.26.0"
 ptgaze = "^0.2.4"
 timm = "^0.4.12"
+h5py = "^3.5.0"
+tensorflow = "^2.7.0"
 
 [tool.poetry.dev-dependencies]
 wemake-python-styleguide = "^0.15.3"
